@@ -18,5 +18,18 @@ const allSongs = [spotifySongs, lastFmSongs];
 const songNames = allSongs
     .reduce((acc, currValue) => {
         return acc.concat(currValue);
-    }, []);
-    //let's map it 
+    }, [])
+    //let's map it out with the seconds turned into minutes
+    .map(song => {
+        return { ...song, duration: Math.floor(song.duration / 60) };
+    })
+    //let's filter the ones under 3 minutes
+    .filter(song => {
+        return song.duration > 3;
+    })
+    //now let's map out the song names the quick way
+    .map(song => song.name)
+    //Join'em up
+    .join(" , ");
+
+console.log(songNames);    
